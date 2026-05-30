@@ -1,7 +1,8 @@
 # ==========================================
 # STAGE 1: Build the React Frontend (Vite)
 # ==========================================
-FROM node:18 AS frontend-builder
+# UPDATED: Using Node 20 to support the latest Vite version
+FROM node:20 AS frontend-builder
 WORKDIR /app/frontend
 
 # Copy package files and install dependencies
@@ -22,8 +23,9 @@ WORKDIR /app
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend files (main.py and your .pkl models)
+# UPDATED: Copy backend AND ml_engine folders based on your exact repo structure
 COPY backend/ ./backend/
+COPY ml_engine/ ./ml_engine/
 
 # Copy the compiled React UI from Stage 1 into a 'static' folder
 COPY --from=frontend-builder /app/frontend/dist ./static
@@ -31,5 +33,5 @@ COPY --from=frontend-builder /app/frontend/dist ./static
 # Expose the standard Hugging Face port
 EXPOSE 7860
 
-# Run Uvicorn pointing to your main.py inside the backend folder
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "7860"]
+# UPDATED: Run Uvicorn pointing to main.py inside backend/app/
+CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "7860"]
