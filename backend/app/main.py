@@ -14,6 +14,8 @@ from google import genai
 from groq import Groq as GroqClient
 from dotenv import load_dotenv
 from datetime import datetime
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 load_dotenv()
 app = FastAPI(title="Threat-Lens API - Enterprise Edition")
@@ -468,3 +470,13 @@ ip_address, geo_location, is_business_hours (boolean), timestamp (ISO8601 format
 async def start_simulation(bg_tasks: BackgroundTasks):
     bg_tasks.add_task(background_simulation)
     return {"status": "success"}
+import os
+
+if os.path.exists("static"):
+    # Mount the static folder at the root URL
+    app.mount("/", StaticFiles(directory="static", html=True), name="static")
+
+    # Fallback for React Router (Single Page Application)
+    @app.exception_handler(404)
+    async def custom_404_handler(request, exc):
+        return FileResponse("static/index.html")
