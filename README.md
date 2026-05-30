@@ -45,13 +45,13 @@
 
 - [Problem Statement](#-problem-statement)
 - [Live Demo](#-live-demo)
-- [How It Works](#-how-it-works)
-- [Tech Stack](#-tech-stack)
+- [How It Works](#%EF%B8%8F-how-it-works)
+- [Tech Stack](#%EF%B8%8F-tech-stack)
 - [How to Run Locally](#-how-to-run-locally)
 - [Project Structure](#-project-structure)
 - [Dataset](#-dataset)
 - [Model Performance](#-model-performance)
-- [Known Limitations](#-known-limitations)
+- [Known Limitations](#%EF%B8%8F-known-limitations)
 - [Team](#-team)
 - [Contact](#-contact)
 
