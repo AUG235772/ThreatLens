@@ -8,11 +8,14 @@ import {
 import ForceGraph2D from 'react-force-graph-2d';
 import { jsPDF } from 'jspdf';
 
-const API_URL       = '/api/v1/events/live';
-const RESET_URL     = '/api/v1/events/reset';
-const SIMULATE_URL  = '/api/v1/events/simulate';
-const COPILOT_URL   = '/api/v1/copilot';
-const FP_BASE_URL   = '/api/v1/events';
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const BASE_BACKEND_URL = IS_LOCAL ? 'http://127.0.0.1:8000' : '';
+
+const API_URL       = `${BASE_BACKEND_URL}/api/v1/events/live`;
+const RESET_URL     = `${BASE_BACKEND_URL}/api/v1/events/reset`;
+const SIMULATE_URL  = `${BASE_BACKEND_URL}/api/v1/events/simulate`;
+const COPILOT_URL   = `${BASE_BACKEND_URL}/api/v1/copilot`;
+const FP_BASE_URL   = `${BASE_BACKEND_URL}/api/v1/events`;
 
 // ── Defined OUTSIDE component — always in scope ──
 const cleanText = (str) => {
